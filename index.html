@@ -5669,6 +5669,8 @@ css.textContent=[
 "#lgEye{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;padding:6px;line-height:0}#lgEye svg{width:22px;height:22px;fill:#3b5578}",
 "#lgGo{width:100%;padding:14px;border:0;border-radius:999px;background:linear-gradient(90deg,#2b83e8,#2a6fe4);color:#fff;font:inherit;font-size:17px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}#lgGo svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.2}",
 "#lgMsg{min-height:20px;margin:0 0 8px;color:#b3432e;font-size:14px}",
+".lgOr{display:flex;align-items:center;gap:10px;margin:10px 0;color:#8a9ab0;font-size:13px}.lgOr:before,.lgOr:after{content:'';flex:1;height:1px;background:#e3e9f2}",
+"#lgGg{width:100%;padding:12px;border:1px solid #d5dfee;border-radius:999px;background:#fff;color:#1e3a5f;font:inherit;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}#lgGg svg{width:20px;height:20px}",
 ".lgRow{display:flex;justify-content:space-between;align-items:center;margin:14px 0 8px;font-size:14px;color:#2a6fe4}.lgRow label{display:flex;align-items:center;gap:8px;cursor:pointer}.lgRow input{width:18px;height:18px}",
 ".lgA{color:#2a6fe4;cursor:pointer;background:none;border:0;font:inherit;font-size:14px;padding:0}",
 "#lgFoot{margin-top:16px;padding-top:16px;border-top:1px solid #e3e9f2;display:flex;gap:12px;align-items:center;justify-content:center;font-size:13px;color:#5d7392;text-align:left}#lgFoot svg{width:32px;height:32px;fill:none;stroke:#5d7392;stroke-width:1.6;flex:none}",
@@ -5682,8 +5684,10 @@ ov.innerHTML='<div id="lgBox"><div id="lgAv"><img src="'+DEFAULT_LOGO+'" alt="�
 '<h2 id="lgTitle">เข้าสู่ระบบ</h2><div id="lgSub">กรุณาใส่ชื่อผู้ใช้และรหัสผ่านของคุณ</div>'+
 '<div class="lgF"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z"/></svg><input id="lgEm" type="email" placeholder="ชื่อผู้ใช้ (อีเมล)" autocomplete="username"></div>'+
 '<div class="lgF"><svg class="i" viewBox="0 0 24 24"><path d="M6 10V8a6 6 0 0 1 12 0v2h1.5A1.5 1.5 0 0 1 21 11.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5v-9A1.5 1.5 0 0 1 4.5 10zm2 0h8V8a4 4 0 0 0-8 0z"/></svg><input id="lgPw" type="password" placeholder="รหัสผ่าน" autocomplete="current-password"><button id="lgEye" type="button" aria-label="แสดงรหัสผ่าน"><svg viewBox="0 0 24 24"><path d="M12 5C6.5 5 2.7 9 1.5 12c1.2 3 5 7 10.5 7s9.3-4 10.5-7C21.3 9 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6.2a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z"/></svg></button></div>'+
+'<div class="lgF" id="lgPw2W" style="display:none"><svg class="i" viewBox="0 0 24 24"><path d="M6 10V8a6 6 0 0 1 12 0v2h1.5A1.5 1.5 0 0 1 21 11.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5v-9A1.5 1.5 0 0 1 4.5 10zm2 0h8V8a4 4 0 0 0-8 0z"/></svg><input id="lgPw2" type="password" placeholder="ยืนยันรหัสผ่านอีกครั้ง" autocomplete="new-password"></div>'+
 '<div id="lgMsg"></div><button id="lgGo" type="button"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="lgGoT">เข้าสู่ระบบ</span></button>'+
 '<div class="lgRow"><label><input id="lgRm" type="checkbox">จำฉันไว้ในระบบ</label><button class="lgA" id="lgFg" type="button">ลืมรหัสผ่าน?</button></div>'+
+'<div class="lgOr"><span>หรือ</span></div><button id="lgGg" type="button"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.5-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>เข้าสู่ระบบด้วย Google</button>'+
 '<button class="lgA" id="lgSw" type="button">ยังไม่มีบัญชี? สมัครใช้งาน</button>'+
 '<div id="lgFoot"><svg viewBox="0 0 24 24"><path d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>ระบบสำหรับบุคลากรและนักเรียน<br>โรงเรียนเทศบาล ๑ วัดต้นสน</div></div></div>';
 document.body.appendChild(ov);
@@ -5692,17 +5696,28 @@ function msg(t){$("lgMsg").textContent=t||""}
 function status(t){ if(!uidNow) return; CLOUD.stat=t; CLOUD.email=auth.currentUser?auth.currentUser.email:""; var a=$("cloudStat"); if(a) a.textContent=t; var b=$("cloudUser"); if(b) b.textContent=CLOUD.email; }
 window.cloudSaveNow=saveNow; window.cloudLogout=logout;
 function saveNow(){ clearTimeout(timer); if(saving){ dirty=true; return; } push(); }
-var ERR={"auth/invalid-credential":"ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง","auth/invalid-email":"ชื่อผู้ใช้ต้องเป็นอีเมล เช่น name@gmail.com","auth/email-already-in-use":"อีเมลนี้สมัครไว้แล้ว ให้เข้าสู่ระบบแทน","auth/weak-password":"รหัสผ่านสั้นเกินไป (อย่างน้อย 6 ตัว)","auth/too-many-requests":"ลองผิดหลายครั้ง กรุณารอสักครู่","auth/network-request-failed":"ไม่มีอินเทอร์เน็ต"};
+var ERR={"auth/invalid-credential":"ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง","auth/invalid-email":"ชื่อผู้ใช้ต้องเป็นอีเมล เช่น name@gmail.com","auth/email-already-in-use":"อีเมลนี้สมัครไว้แล้ว ให้เข้าสู่ระบบแทน","auth/weak-password":"รหัสผ่านสั้นเกินไป (อย่างน้อย 6 ตัว)","auth/too-many-requests":"ลองผิดหลายครั้ง กรุณารอสักครู่","auth/network-request-failed":"ไม่มีอินเทอร์เน็ต","auth/operation-not-allowed":"ยังไม่ได้เปิดใช้วิธีล็อกอินนี้ใน Firebase","auth/unauthorized-domain":"โดเมนนี้ยังไม่ได้รับอนุญาตใน Firebase (Authorized domains)","auth/account-exists-with-different-credential":"อีเมลนี้สมัครไว้ด้วยวิธีอื่นแล้ว ให้เข้าสู่ระบบด้วยวิธีเดิม"};
 function fail(e){ msg(ERR[e.code]||("เกิดข้อผิดพลาด: "+e.code)); }
+var PWRE=/^(?=.*[A-Za-z])(?=.*\d)[\x21-\x7E]{8,}$/;
 $("lgSw").onclick=function(){ reg=!reg; $("lgGoT").textContent=$("lgTitle").textContent=reg?"สมัครใช้งาน":"เข้าสู่ระบบ";
-  $("lgSub").textContent=reg?"กรอกอีเมลและตั้งรหัสผ่านอย่างน้อย 6 ตัว":"กรุณาใส่ชื่อผู้ใช้และรหัสผ่านของคุณ";
-  $("lgSw").textContent=reg?"มีบัญชีแล้ว? เข้าสู่ระบบ":"ยังไม่มีบัญชี? สมัครใช้งาน"; msg(""); };
-$("lgEye").onclick=function(){ var p=$("lgPw"); p.type=p.type==="password"?"text":"password"; };
+  $("lgSub").textContent=reg?"กรอกอีเมล และตั้งรหัสผ่าน 8 ตัวขึ้นไป (ภาษาอังกฤษและตัวเลข)":"กรุณาใส่ชื่อผู้ใช้และรหัสผ่านของคุณ";
+  $("lgSw").textContent=reg?"มีบัญชีแล้ว? เข้าสู่ระบบ":"ยังไม่มีบัญชี? สมัครใช้งาน"; $("lgPw2W").style.display=reg?"block":"none";
+  $("lgPw").placeholder=reg?"ตั้งรหัสผ่าน":"รหัสผ่าน"; $("lgPw").autocomplete=reg?"new-password":"current-password"; msg(""); };
+$("lgEye").onclick=function(){ var t=$("lgPw").type==="password"?"text":"password"; $("lgPw").type=t; $("lgPw2").type=t; };
+function persist(){ var P=firebase.auth.Auth.Persistence; return auth.setPersistence($("lgRm").checked?P.LOCAL:P.SESSION); }
 $("lgGo").onclick=function(){ var e=$("lgEm").value.trim(), p=$("lgPw").value; msg("");
   if(!e||!p){ msg("กรอกชื่อผู้ใช้และรหัสผ่านก่อน"); return; }
-  var P=firebase.auth.Auth.Persistence, mode=$("lgRm").checked?P.LOCAL:P.SESSION;
-  auth.setPersistence(mode).then(function(){ return reg?auth.createUserWithEmailAndPassword(e,p):auth.signInWithEmailAndPassword(e,p); }).catch(fail); };
-$("lgPw").onkeydown=$("lgEm").onkeydown=function(ev){ if(ev.key==="Enter") $("lgGo").onclick(); };
+  if(reg){
+    if(!PWRE.test(p)){ msg("รหัสผ่านต้องยาว 8 ตัวขึ้นไป มีตัวอักษรภาษาอังกฤษและตัวเลข (ห้ามมีภาษาไทยหรือเว้นวรรค)"); return; }
+    if(p!==$("lgPw2").value){ msg("รหัสผ่านและช่องยืนยันไม่ตรงกัน"); return; } }
+  persist().then(function(){ return reg?auth.createUserWithEmailAndPassword(e,p):auth.signInWithEmailAndPassword(e,p); }).catch(fail); };
+$("lgGg").onclick=function(){ msg(""); var pr=new firebase.auth.GoogleAuthProvider();
+  persist().then(function(){ return auth.signInWithPopup(pr); }).catch(function(e){
+    if(e.code==="auth/popup-blocked"||e.code==="auth/operation-not-supported-in-this-environment") return auth.signInWithRedirect(pr);
+    if(e.code==="auth/popup-closed-by-user"||e.code==="auth/cancelled-popup-request") return;
+    fail(e); }); };
+auth.getRedirectResult().catch(fail);
+$("lgPw").onkeydown=$("lgPw2").onkeydown=$("lgEm").onkeydown=function(ev){ if(ev.key==="Enter") $("lgGo").onclick(); };
 $("lgFg").onclick=function(){ var e=$("lgEm").value.trim(); if(!e){msg("กรอกอีเมลก่อน แล้วกดลืมรหัสผ่าน");return;}
   auth.sendPasswordResetEmail(e).then(function(){msg("ส่งลิงก์ตั้งรหัสผ่านใหม่ไปที่อีเมลแล้ว (เช็กกล่องสแปมด้วย)");}).catch(fail); };
 
