@@ -93,7 +93,11 @@
   .side-btn:hover{ background:rgba(244,241,232,0.08); }
   .side-btn.danger{ color:#E9B7A8; border-color:rgba(233,183,168,0.4); }
 
-  .main{ flex:1; padding:28px 36px; max-width:1180px; }
+  .main{ flex:1; min-width:0; padding:28px 36px; max-width:none; }
+  .struct-actions{ max-width:960px; margin-top:14px; padding:14px 16px; background:#fff; border:1px solid var(--line); border-radius:10px; }
+  .sa-title{ font-size:13px; font-weight:600; color:var(--gray); margin-bottom:8px; }
+  .sa-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; }
+  .sa-grid .btn-outline{ width:100%; justify-content:center; }
 
   .mobile-topbar{ display:none; }
 
@@ -1998,7 +2002,7 @@ function renderStructPasteMapBox(){
   return '' +
   '<div style="background:white; border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:12px;">' +
     '<div style="font-size:15px; font-weight:600; color:var(--ink); margin-bottom:6px;">ตรวจสอบคอลัมน์ — วางโครงสร้างรายวิชาจาก Excel</div>' +
-    '<div class="section-sub" style="margin-bottom:8px;">ระบุว่าแต่ละคอลัมน์คืออะไร — ถ้ามีคอลัมน์ "ช่วงเวลา" ระบบจะดูว่าเป็นตัวชี้วัดหรือคะแนนสอบให้อัตโนมัติ (ก่อน/หลังกลางภาค = ตัวชี้วัด, กลางภาค/ปลายภาค = คะแนนสอบ) · ไม่จำเป็นต้องมีคอลัมน์ "ช่วงเวลา" และ "คะแนนเต็ม" ก็ได้ (เช่น วางแค่คอลัมน์ชื่อรายการอย่างเดียว) — คอลัมน์ที่ไม่ได้วางมา ระบบจะใช้ "ค่าเริ่มต้น" ด้านล่างแทนไปก่อน แล้วค่อยไปแก้ทีละรายการในตารางโครงสร้างภายหลังได้ · การวางนี้สร้าง "รายการ" เท่านั้น ยังไม่มีคะแนนของนักเรียน — วางคะแนนจริงทีหลังได้ผ่านปุ่ม "วางคะแนนของรายการเหล่านี้จาก Excel" หลังยืนยันนำเข้าแล้ว</div>' +
+    '<div class="section-sub" style="margin-bottom:8px;">ระบุว่าแต่ละคอลัมน์คืออะไร — ถ้ามีคอลัมน์ "ช่วงเวลา" ระบบจะดูว่าเป็นตัวชี้วัดหรือคะแนนสอบให้อัตโนมัติ (ก่อน/หลังกลางภาค = ตัวชี้วัด, กลางภาค/ปลายภาค = คะแนนสอบ) · ไม่จำเป็นต้องมีคอลัมน์ "ช่วงเวลา" และ "คะแนนเต็ม" ก็ได้ (เช่น วางแค่คอลัมน์ชื่อรายการอย่างเดียว) — คอลัมน์ที่ไม่ได้วางมา ระบบจะใช้ "ค่าเริ่มต้น" ด้านล่างแทนไปก่อน แล้วค่อยไปแก้ทีละรายการในตารางโครงสร้างภายหลังได้ · การวางนี้สร้าง "รายการ" เท่านั้น ยังไม่มีคะแนนของนักเรียน — วางคะแนนจริงทีหลังได้ที่แท็บ "คะแนน" หลังยืนยันนำเข้าแล้ว</div>' +
     '<label style="display:flex; align-items:center; gap:6px; margin-bottom:8px; font-size:14px;">' +
       '<input type="checkbox" '+(isHeader?"checked":"")+' onchange="toggleStructPasteHeaderRow(this.checked)"/> แถวแรกเป็นหัวตาราง (ไม่นำเข้าเป็นรายการ)' +
     '</label>' +
@@ -4191,16 +4195,19 @@ function renderStructure(s, comp){
   '<div class="table-scroll"><table class="ptable" style="max-width:960px;"><thead><tr>' +
     '<th style="width:40px;">ที่</th><th style="width:120px;">ตัวชี้วัด</th><th style="width:260px;">ชื่อรายการ</th><th style="width:160px;">ประเภท</th><th style="width:140px;">ช่วงเวลา</th><th style="width:100px;">คะแนนเต็ม</th><th style="width:40px;"></th>' +
   '</tr></thead><tbody>'+rows+'</tbody></table></div>' +
-  '<div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">' +
-    '<button class="btn-outline" onclick="addStructureItem(\'collect\',\'before\')">'+icon("plus",15)+' เพิ่มตัวชี้วัด (ก่อนกลางภาค)</button>' +
-    '<button class="btn-outline" onclick="addStructureItem(\'collect\',\'after\')">'+icon("plus",15)+' เพิ่มตัวชี้วัด (หลังกลางภาค)</button>' +
-    '<button class="btn-outline" style="border-color:#6B5B75; color:#6B5B75;" onclick="addStructureItem(\'exam\')">'+icon("plus",15)+' เพิ่มคะแนนสอบ</button>' +
-  '</div>' +
-  '<div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">' +
-    '<button class="btn-outline" onclick="addMultipleStructureItems(\'before\')">'+icon("plus",15)+' เพิ่มหลายตัวชี้วัดพร้อมกัน (ก่อนกลางภาค)</button>' +
-    '<button class="btn-outline" onclick="addMultipleStructureItems(\'after\')">'+icon("plus",15)+' เพิ่มหลายตัวชี้วัดพร้อมกัน (หลังกลางภาค)</button>' +
-    '<button class="btn-outline" onclick="openStructPasteImport()">'+icon("upload",15)+' วางโครงสร้างจาก Excel</button>' +
-    (s.structure.length ? '<button class="btn-outline" onclick="UI.tab=\'scores\'; openScorePasteImport(\'structure\');">'+icon("upload",15)+' วางคะแนนของรายการเหล่านี้จาก Excel</button>' : '') +
+  '<div class="struct-actions">' +
+    '<div class="sa-title">เพิ่มรายการ</div>' +
+    '<div class="sa-grid">' +
+      '<button class="btn-outline" onclick="addStructureItem(\'collect\',\'before\')">'+icon("plus",15)+' เพิ่มตัวชี้วัด (ก่อนกลางภาค)</button>' +
+      '<button class="btn-outline" onclick="addStructureItem(\'collect\',\'after\')">'+icon("plus",15)+' เพิ่มตัวชี้วัด (หลังกลางภาค)</button>' +
+      '<button class="btn-outline" style="border-color:#6B5B75; color:#6B5B75;" onclick="addStructureItem(\'exam\')">'+icon("plus",15)+' เพิ่มคะแนนสอบ</button>' +
+    '</div>' +
+    '<div class="sa-title" style="margin-top:14px;">เพิ่มหลายรายการ / นำเข้าจาก Excel</div>' +
+    '<div class="sa-grid">' +
+      '<button class="btn-outline" onclick="addMultipleStructureItems(\'before\')">'+icon("plus",15)+' เพิ่มหลายตัวชี้วัด (ก่อนกลางภาค)</button>' +
+      '<button class="btn-outline" onclick="addMultipleStructureItems(\'after\')">'+icon("plus",15)+' เพิ่มหลายตัวชี้วัด (หลังกลางภาค)</button>' +
+      '<button class="btn-outline" onclick="openStructPasteImport()">'+icon("upload",15)+' วางโครงสร้างจาก Excel</button>' +
+    '</div>' +
     renderStructPasteUndoInline() +
   '</div>' +
   structPasteImportBlock(s) +
