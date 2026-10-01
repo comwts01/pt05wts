@@ -5650,6 +5650,57 @@ rerender();
 setTimeout(function(){ var n=document.getElementById("saveNote"); if(n) n.textContent="พร้อมใช้งาน (ยังไม่มีการเปลี่ยนแปลงใหม่)"; }, 50);
 </script>
 
+
+<style>
+.hl-row > td{ box-shadow:inset 0 0 0 100px rgba(255,193,7,.26) !important; }
+.hl-row > td:first-child{ box-shadow:inset 5px 0 0 #2F6FED, inset 0 0 0 100px rgba(255,193,7,.26) !important; }
+.hl-col{ box-shadow:inset 0 0 0 100px rgba(47,111,237,.13) !important; }
+.hl-row > td.hl-col{ box-shadow:inset 0 0 0 100px rgba(47,111,237,.22) !important; }
+.hl-row input[data-srow], .hl-row .att-btn{ box-shadow:inset 0 0 0 100px rgba(255,193,7,.26) !important; }
+.hl-col input[data-srow], .hl-col .att-btn{ box-shadow:inset 0 0 0 100px rgba(47,111,237,.14) !important; }
+td.hl-cell{ outline:3px solid #2F6FED; outline-offset:-3px; position:relative; z-index:1; }
+td.hl-name, td.hl-name *{ font-weight:700 !important; }
+th.hl-colhead{ box-shadow:inset 0 -4px 0 #2F6FED, inset 0 0 0 100px rgba(47,111,237,.2) !important; }
+#hlChip{ position:fixed; left:50%; bottom:14px; transform:translateX(-50%); z-index:9998; max-width:92vw; background:#12305a; color:#fff; padding:7px 16px; border-radius:999px; font-size:15px; box-shadow:0 4px 14px rgba(0,0,0,.3); display:none; pointer-events:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+@media print{ #hlChip{ display:none !important; } .hl-row > td, .hl-col, .hl-colhead, .hl-row input, .hl-row .att-btn, .hl-col input, .hl-col .att-btn{ box-shadow:none !important; } td.hl-cell{ outline:none; } }
+</style>
+<script>
+/* ===== ไฮไลต์แถว/คอลัมน์ที่กำลังกรอก กันกรอกผิดคน ===== */
+(function(){
+var HL=null, chip=document.createElement("div"); chip.id="hlChip"; document.body.appendChild(chip);
+var SEL="[data-srow][data-scol]";
+function clearMarks(){ var a=document.querySelectorAll(".hl-row,.hl-col,.hl-cell,.hl-name,.hl-colhead"); for(var i=0;i<a.length;i++) a[i].classList.remove("hl-row","hl-col","hl-cell","hl-name","hl-colhead"); chip.style.display="none"; }
+function clearHL(){ HL=null; clearMarks(); }
+function txt(el){ return (el&&el.innerText||"").replace(/\s+/g," ").trim(); }
+function apply(){
+  clearMarks(); if(!HL) return;
+  if(HL.tab!==UI.tab||HL.sid!==DB.currentId){ HL=null; return; }
+  var t=document.querySelectorAll("table")[HL.t]; if(!t) return;
+  var cells=t.querySelectorAll(SEL), row=null, hit=null;
+  for(var i=0;i<cells.length;i++){ var c=cells[i], td=c.closest("td"); if(!td) continue;
+    var r=+c.getAttribute("data-srow"), k=+c.getAttribute("data-scol");
+    if(r===HL.r){ row=td.parentNode; row.classList.add("hl-row"); }
+    if(HL.c>=0&&k===HL.c){ td.classList.add("hl-col"); }
+    if(r===HL.r&&k===HL.c){ td.classList.add("hl-cell"); hit=td; } }
+  var who="", col="";
+  if(row){ var a=row.cells[0], b=row.cells[1]; if(a) a.classList.add("hl-name"); if(b) b.classList.add("hl-name"); who=(txt(a)+" "+txt(b)).trim(); }
+  if(hit){ var x=hit.getBoundingClientRect(), cx=x.left+x.width/2, ths=t.querySelectorAll("thead th");
+    for(var j=0;j<ths.length;j++){ var q=ths[j].getBoundingClientRect(); if(cx>=q.left&&cx<=q.right){ ths[j].classList.add("hl-colhead"); col=txt(ths[j]); } } }
+  if(who){ chip.textContent="▶ "+who+(col?"  ·  "+col:""); chip.style.display="block"; }
+}
+function set(el,colToo){ var t=el.closest("table"); if(!t) return; var all=document.querySelectorAll("table"), ti=Array.prototype.indexOf.call(all,t);
+  HL={tab:UI.tab,sid:DB.currentId,t:ti,r:+el.getAttribute("data-srow"),c:colToo?+el.getAttribute("data-scol"):-1}; apply(); }
+document.addEventListener("focusin",function(ev){ var el=ev.target.closest&&ev.target.closest(SEL); if(el) set(el,true); },true);
+document.addEventListener("click",function(ev){
+  var tg=ev.target; if(!tg.closest) return;
+  var el=tg.closest(SEL); if(el){ set(el,true); return; }
+  var td=tg.closest("td"); if(td&&td.parentNode){ var c=td.parentNode.querySelector(SEL); if(c){ set(c,false); return; } }
+  if(!tg.closest("table")) clearHL();
+},true);
+var _r=window.rerender; window.rerender=function(){ var x=_r.apply(this,arguments); apply(); return x; };
+window.addEventListener("beforeprint",clearMarks); window.addEventListener("afterprint",apply);
+})();
+</script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
